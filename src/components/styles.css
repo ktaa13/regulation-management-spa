@@ -1,0 +1,59 @@
+/* styles.css */
+.container {
+  width: 80%;
+  margin: auto;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.details-container {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+
+.details-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.details-container li {
+  margin: 10px 0;
+}
+
+.back-button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.truncated-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
