@@ -8,7 +8,7 @@ const DetailsPage = () => {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/data/${decodedId}`)
+    fetch(`http://springboot:8080/api/data/${decodedId}`)
     
       .then((response) => response.json())
       .then((data) => setDetails(data))

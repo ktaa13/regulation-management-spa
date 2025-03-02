@@ -11,7 +11,7 @@ function App() {
 
   // Fetch columns from the server
   useEffect(() => {
-    axios.get('http://localhost:8080/api/data/columns')
+    axios.get('http://springboot:8080/api/data/columns')
       .then(response => {
         setColumns(response.data);
       })
@@ -22,7 +22,7 @@ function App() {
 
   // Fetch paginated data from the server
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/data?page=${page}&size=${size}`)
+    axios.get(`http://springboot:8080/api/data?page=${page}&size=${size}`)
       .then(response => {
         setData(response.data);
       })
