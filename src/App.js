@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import MainTable from './components/MainTable';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
 
   // Fetch columns from the server
   useEffect(() => {
-    axios.get('http://springboot:8080/api/data/columns')
+    axios.get('http://localhost:8080/api/data/columns')
       .then(response => {
         setColumns(response.data);
       })
@@ -22,7 +22,7 @@ function App() {
 
   // Fetch paginated data from the server
   useEffect(() => {
-    axios.get(`http://springboot:8080/api/data?page=${page}&size=${size}`)
+    axios.get(`http://localhost:8080/api/data?page=${page}&size=${size}`)
       .then(response => {
         setData(response.data);
       })
@@ -43,33 +43,41 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Dynamic Data Table</h1>
+    <div className="container mt-4" dir="rtl">  {/* RTL Support */}
+      <div className="card shadow">
+        <div className="card-header bg-primary text-white text-end"> {/* Align text to the right */}
+          <h2 className="mb-0">جدول البيانات الديناميكي</h2> {/* Arabic title */}
+        </div>
 
-      <div className="pagination-controls">
-        <label>
-          Page Size:
-          <select value={size} onChange={handlePageSizeChange}>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-          </select>
-        </label>
+        <div className="card-body">
+          {/* Pagination Controls */}
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <label className="form-label">حجم الصفحة:</label>
+              <select className="form-select" value={size} onChange={handlePageSizeChange}>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+            </div>
 
-        <label>
-          Page Number:
-          <input 
-            type="number" 
-            value={page} 
-            onChange={handlePageChange} 
-            min="0" 
-            max="100"
-          />
-        </label>
+            <div className="col-md-6">
+              <label className="form-label">رقم الصفحة:</label>
+              <input 
+                type="number" 
+                className="form-control"
+                value={page} 
+                onChange={handlePageChange} 
+                min="0" 
+                max="100"
+              />
+            </div>
+          </div>
+
+          {/* Data Table */}
+          <MainTable data={data} columns={columns} />
+        </div>
       </div>
-
-      {/* Passing data and columns to the MainTable */}
-      <MainTable data={data} columns={columns} />
     </div>
   );
 }
