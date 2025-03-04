@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import DetailsPage from './components/DetailsPage';
+import LoginPage from './components/LoginPage';
+import PrivateRoute from './components/PrivateRoute';
+import MainTable from './components/MainTable.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -28,6 +31,12 @@ root.render(
               <li className="nav-item">
                 <Link className="nav-link" to="/">الرئيسية</Link> {/* Arabic text */}
               </li>
+              <li className="nav-item">
+                <button className="btn btn-danger" onClick={() => {
+                  localStorage.removeItem('token');
+                  window.location.href = '/login';
+                }}>تسجيل الخروج</button>
+              </li>
             </ul>
           </div>
         </div>
@@ -36,8 +45,9 @@ root.render(
       {/* Page Content */}
       <div className="container mt-4">
         <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/details/:id" element={<DetailsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<PrivateRoute><MainTable /></PrivateRoute>} />
+          <Route path="/details/:id" element={<PrivateRoute><DetailsPage /></PrivateRoute>} />
         </Routes>
       </div>
     </div>
